@@ -279,7 +279,7 @@ export default function TransactionForm({onAddTransaction}: TransactionFormProps
                                     className="sr-only"
                                 />
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
                                 </svg>
                                 <span className="text-sm font-medium">Pengeluaran</span>
                             </label>
@@ -300,7 +300,7 @@ export default function TransactionForm({onAddTransaction}: TransactionFormProps
                                     className="sr-only"
                                 />
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                                 </svg>
                                 <span className="text-sm font-medium">Pemasukan</span>
                             </label>
@@ -626,7 +626,7 @@ export default function TransactionForm({onAddTransaction}: TransactionFormProps
 }
 
 // Helper component for category buttons
-function CategoryButton({ id, icon, label, selected, onClick }: { 
+function CategoryButton({ icon, label, selected, onClick }: { 
     id: string, 
     icon: string, 
     label: string, 
