@@ -1,0 +1,22 @@
+{
+    "name": "MyWallet - Aplikasi Pencatatan Keuangan",
+    "short_name": "MyWallet",
+    "icons": [
+      {
+        "src": "/icons/digital-wallet.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/icons/digital-wallet1.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "theme_color": "#4A90E2",
+    "background_color": "#FFFFFF",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait"
+  }
