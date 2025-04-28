@@ -45,7 +45,7 @@ export default function Navigation() {
 
   return (
     <motion.nav 
-      className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around z-30 pb-safe"
+      className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around z-30 pb-5"
       initial={{ y: 0 }}
       animate={{ y: isNavHidden ? 100 : 0 }}
       transition={{ duration: 0.3 }}
