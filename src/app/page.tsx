@@ -4,6 +4,11 @@ import { useEffect } from "react";
 import useTransactions from "@/hooks/useTransactions";
 import TransactionList from "@/components/TransactionList";
 
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+}
+
 export default function Dashboard() {
   const {
     transactions,
@@ -28,6 +33,47 @@ export default function Dashboard() {
     }).format(amount);
   };
 
+  useEffect(() => {
+    let deferredPrompt: BeforeInstallPromptEvent | null = null;
+
+    const installBanner = document.getElementById('pwa-install-banner')!;
+    const installButton = document.getElementById('pwa-install-button')!;
+    const dismissButton = document.getElementById('pwa-dismiss-button')!;
+  
+    const beforeInstallPromptHandler = (e: Event) => {
+      e.preventDefault();
+      deferredPrompt = e as unknown as BeforeInstallPromptEvent;
+      installBanner.classList.remove('hidden');
+    };
+    
+  
+    const installClickHandler = async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          installBanner.classList.add('hidden');
+        }
+        deferredPrompt = null;
+      }
+    };
+  
+    const dismissClickHandler = () => {
+      installBanner.classList.add('hidden');
+    };
+  
+    window.addEventListener('beforeinstallprompt', beforeInstallPromptHandler);
+    installButton.addEventListener('click', installClickHandler);
+    dismissButton.addEventListener('click', dismissClickHandler);
+  
+    // Clean up listeners saat komponen unmount
+    return () => {
+      window.removeEventListener('beforeinstallprompt', beforeInstallPromptHandler);
+      installButton.removeEventListener('click', installClickHandler);
+      dismissButton.removeEventListener('click', dismissClickHandler);
+    };
+  }, []);
+  
   return (
     <div className="px-4 pt-4">
       <div className="mb-6">

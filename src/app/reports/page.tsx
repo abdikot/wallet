@@ -78,7 +78,7 @@ export default function ReportsPage() {
     };
     
     fetchData();
-  }, [selectedDate, fetchTransactionsByMonth, reportView, fetchTransactions]);
+  }, [selectedDate, fetchTransactionsByMonth, reportView, fetchTransactions, ]);
   
   // Persiapkan data chart
   useEffect(() => {
@@ -87,7 +87,7 @@ export default function ReportsPage() {
     } else if (reportView === 'trends') {
       prepareMonthlyTrendData();
     }
-  }, [transactions, reportView]);
+  }, [transactions, reportView,]);
   
   const getCategoryEmoji = (category: string) => {
     const emojis: Record<string, string> = {
