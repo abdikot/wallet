@@ -34,7 +34,7 @@ export default function Dashboard() {
         <h1 className="text-2xl font-bold text-center text-blue-600">My Wallet</h1>
       </div>
 
-      <div className="bg-blue-600 text-white rounded-lg shadow-lg p-4 mb-4 text-center">
+      <div className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-lg shadow-lg p-4 mb-4 text-center">
         <h2 className="text-lg font-medium mb-1">Saldo Total</h2>
         <p className="text-3xl font-bold">
           {loading ? 'Memuat...' : formatCurrency(calculateBalance())}

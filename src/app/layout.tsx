@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="id">
       <head />
       <body className="bg-gray-50 text-gray-900 min-h-screen">
-        <div className="max-w-lg mx-auto pb-20">
+        <div className="max-w-lg mx-auto pb-48">
           {children}
         </div>
         

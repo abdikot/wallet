@@ -5,8 +5,9 @@ import useTransactions from '@/hooks/useTransactions';
 import { format, subMonths, addMonths } from 'date-fns';
 import { id } from 'date-fns/locale';
 import dynamic from 'next/dynamic';
+import { ChartData } from 'chart.js';
 
-// Import Chart.js dinamis agar tidak menyebabkan error SSR
+
 const DoughnutChart = dynamic(
   () => import('react-chartjs-2').then((mod) => mod.Doughnut),
   { ssr: false }
@@ -30,7 +31,7 @@ export default function ReportsPage() {
   const { transactions, fetchTransactionsByMonth } = useTransactions();
   
   const [selectedDate, setSelectedDate] = useState(() => new Date());
-  const [chartData, setChartData] = useState<any>(null);
+  const [chartData, setChartData] = useState<ChartData<'doughnut'> | null>(null);
   const [categoryTotals, setCategoryTotals] = useState<Array<{
     category: string;
     amount: number;
