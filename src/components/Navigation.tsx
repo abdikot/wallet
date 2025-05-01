@@ -11,21 +11,21 @@ export default function Navigation() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isNavHidden, setIsNavHidden] = useState(false);
 
-  // Set mounted untuk mencegah hydration mismatch
+  // Set mounted to prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Menambahkan efek scroll untuk menyembunyikan navigasi saat scroll ke bawah
+  // Add scroll effect to hide navigation when scrolling down
   useEffect(() => {
     const controlNavbar = () => {
       if (typeof window !== 'undefined') {
-        if (window.scrollY > 100) { // Hanya aktifkan ketika sudah scroll cukup jauh
+        if (window.scrollY > 100) { // Only activate when scrolled far enough
           if (window.scrollY > lastScrollY && !isNavHidden) {
-            // Scroll ke bawah
+            // Scrolling down
             setIsNavHidden(true);
           } else if (window.scrollY < lastScrollY && isNavHidden) {
-            // Scroll ke atas
+            // Scrolling up
             setIsNavHidden(false);
           }
         } else {
@@ -45,7 +45,7 @@ export default function Navigation() {
 
   return (
     <motion.nav 
-      className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around z-30 pb-5"
+      className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center z-30 pb-5 pt-2"
       initial={{ y: 0 }}
       animate={{ y: isNavHidden ? 100 : 0 }}
       transition={{ duration: 0.3 }}
@@ -85,23 +85,25 @@ export default function Navigation() {
         }
       />
       
-      <Link
-        href="/transactions"
-        className="relative flex flex-col items-center justify-center"
-        aria-label="Tambah Transaksi Baru"
-      >
-        <div className="absolute -top-6 flex items-center justify-center">
+      {/* Add Transaction Button */}
+      <div className="relative flex flex-col items-center">
+        <Link
+          href="/transactions"
+          className="flex items-center justify-center"
+          aria-label="Tambah Transaksi Baru"
+        >
           <motion.div
             whileTap={{ scale: 0.9 }}
-            className="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center shadow-lg"
+            className="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center shadow-lg relative -top-4"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-6 h-6">
               <path fillRule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clipRule="evenodd" />
             </svg>
           </motion.div>
-        </div>
-        <div className="h-6"></div> {/* Spacer for layout */}
-      </Link>
+        </Link>
+        {/* Empty label to maintain spacing consistent with other nav items */}
+        <span className="text-xs mt-1 opacity-0">Add</span>
+      </div>
       
       <NavItem 
         href="/reports" 
@@ -156,21 +158,14 @@ function NavItem({
   return (
     <Link 
       href={href} 
-      className={`flex flex-col items-center justify-center relative py-2 px-3 ${
+      className={`flex flex-col items-center justify-center py-2 px-3 ${
         isActive ? 'text-blue-600' : 'text-gray-500'
       }`}
       aria-current={isActive ? 'page' : undefined}
     >
-      <motion.div
-        initial={false}
-        animate={{ 
-          scale: isActive ? 1 : 0.9,
-          y: isActive ? -2 : 0
-        }}
-        transition={{ duration: 0.2 }}
-      >
+      <div className="h-6 flex items-center justify-center">
         {isActive ? activeIcon : inactiveIcon}
-      </motion.div>
+      </div>
       
       <motion.span 
         className="text-xs mt-1 font-medium"
@@ -186,7 +181,7 @@ function NavItem({
       {isActive && (
         <motion.div
           layoutId="nav-indicator"
-          className="absolute -bottom-2 w-12 h-1 bg-blue-600 rounded-t-full"
+          className="absolute bottom-0 w-12 h-1 bg-blue-600 rounded-t-full"
           initial={false}
           transition={{ type: "spring", stiffness: 500, damping: 30 }}
         />
